@@ -1,7 +1,9 @@
 """Multivariable Chinese Remainder Theorem"""
 
 from math import gcd
+
 import numpy as np
+
 
 def egcd(a, m):
     """Extended GCD"""
@@ -9,6 +11,7 @@ def egcd(a, m):
         return (m, 0, 1)
     g, y, x = egcd(m % a, a)
     return (g, x - (m // a) * y, y)
+
 
 def modinv(a, m):
     """Find Modular Inverse"""
@@ -19,15 +22,17 @@ def modinv(a, m):
     else:
         return x % m
 
+
 def pivot(A, m):
     """Finds the pivot of A and m"""
     length = len(A)
-    result = [0]*length
+    result = [0] * length
     for i in range(length):
         for j in range(length):
             if gcd(A[i][j], m[i]) == 1:
                 result[i] = j
     return result
+
 
 def is_sol(A, x, b, m):
     """Checks if Ax = b mod m"""
@@ -37,11 +42,12 @@ def is_sol(A, x, b, m):
             return False
     return True
 
+
 def mcrt(A, b, m):
     """Returns for x in Ax = b mod m"""
     eqn_cnt = len(A)
     piv = pivot(A, m)
-    x = [0]*eqn_cnt
+    x = [0] * eqn_cnt
     m_prod = 1
 
     for i in range(eqn_cnt):
